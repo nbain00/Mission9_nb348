@@ -24,6 +24,7 @@ namespace Mission9_nb348.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext vc { get; set; }
 
+        // This brings in all the things from the button
         public PageInfo PageInfo { get; set; }
         public string PageAction { get; set; }
         public bool PageClassesEnabled { get; set; } = false;
@@ -44,12 +45,15 @@ namespace Mission9_nb348.Infrastructure
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
                 if (PageClassesEnabled)
                 {
+                    // Adds Bootstrap classes to buttons
                     tb.AddCssClass(PageClass);
                     tb.AddCssClass(i == PageInfo.CurrentPage
                         ? PageClassSelected : PageClassNormal);
                 }
+                // Appends a tag to all page buttons
                 tb.InnerHtml.Append(i.ToString());
 
+                // Appends final product to page
                 final.InnerHtml.AppendHtml(tb);
             }
 
