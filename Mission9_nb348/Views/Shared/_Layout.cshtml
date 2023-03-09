@@ -8,18 +8,24 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
-<body>
+<body>            
     <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">Book Store</span>       
+        <span class="navbar-brand m-lg-2">Book Store</span>
     </div>
+
     <div class="row m-1 p-1">
-        <div id="categories" class="col-3"></div>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+
+        <div id="types" class="col-3">
+            <vc:types></vc:types>
         </div>
+        <div class="col-9">
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

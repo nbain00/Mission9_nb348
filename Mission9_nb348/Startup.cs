@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // Nathan Bain
-// Mission 9 Assignment
+// Mission 10 Assignment
 namespace Mission9_nb348
 {
     public class Startup
@@ -35,6 +35,11 @@ namespace Mission9_nb348
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +57,7 @@ namespace Mission9_nb348
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -60,8 +65,23 @@ namespace Mission9_nb348
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "typepaging",
+                    "{bookType}/P{pageNum}",
+                    new { Controller = "Home", action = "Index"});
+
+                endpoints.MapControllerRoute(
+                    "paging",
+                    "P{pageNum}",
+                    new { Controller = "Home", action = "Index"});
+
+                endpoints.MapControllerRoute(
+                    "type",
+                    "{bookType}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }
