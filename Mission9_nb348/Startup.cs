@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 
 // Nathan Bain
 // Mission 10 Assignment
+// I totally thought the instructions said to put the comment in the project and not on learning suite for the bootstrap
+// So I inlcuded them here, and not there. Sorry.
+
+// Bootstrap 1 - Changed colors for "Add to Cart" button
+// Bootstrap 2 - Changed colors for "Price" tag
 namespace Mission9_nb348
 {
     public class Startup
