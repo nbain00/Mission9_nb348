@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // Nathan Bain
-// Mission 10 Assignment
-// I totally thought the instructions said to put the comment in the project and not on learning suite for the bootstrap
-// So I inlcuded them here, and not there. Sorry.
-
-// Bootstrap 1 - Changed colors for "Add to Cart" button
-// Bootstrap 2 - Changed colors for "Price" tag
+// Mission 11 Assignment
 namespace Mission9_nb348
 {
     public class Startup
@@ -40,11 +36,15 @@ namespace Mission9_nb348
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
 
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
